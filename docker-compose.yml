@@ -1,0 +1,20 @@
+# Mage Inferno Docker Compose (https://github.com/mageinferno/magento2-docker-compose)
+# Version 2.1.0
+
+app:
+  image: local-nginx
+  ports:
+    - "80:80"
+  volumes_from:
+    - appdata
+  environment:
+    - APP_MAGE_MODE=production
+    - VIRTUAL_HOST=mysite.com
+
+appdata:
+  image: tianon/true
+  volumes:
+    - ./templates:/etc/nginx/templates
+    - ./nginx/conf.d:/etc/nginx/conf.d
+    - ./src:/src
+    - ~/.composer:/root/.composer
